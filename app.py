@@ -1,7 +1,7 @@
 from googletrans import Translator
 from fastapi import FastAPI
 from pydantic import BaseModel
-from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = ["*"] 
