@@ -32,7 +32,7 @@ async def getTrans(translation:translationClass):
         translated = (translator.translate(translation.sentence, dest= str(i)))
         translatedLangs[i] = translated.text
     data = {"content": translatedLangs}
-    res = requests.patch(f"{api_uri}", data)
+    res = requests.patch(f"{api_uri}/article/update", data)
     print(res)
     return translatedLangs
 
