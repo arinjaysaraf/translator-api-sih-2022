@@ -15,18 +15,16 @@ app.add_middleware(
 
 class translationClass(BaseModel): 
     sentence:str 
-    toLang:str
-    fromLang:str 
 
-toLangs = ['en', 'gu', 'hi', 'kn', 'kok', 'mr', 'pa', 'sa', 'ta', 'te']
-translatedLangs = {}
 
 
 @app.post("/")
 async def getTrans(translation:translationClass):
+    toLangs = ["hi","gu","kn","mr","ml","pa","ta","te","en"]
+    translatedLangs = {}
+    translator = Translator()
     for i in toLangs:
-        translator = Translator()
-        translated = (translator.translate(translation.sentence, dest= i,src = translation.fromLang))
+        translated = (translator.translate(translation.sentence, dest= str(i)))
         translatedLangs[i] = translated.text
     return translatedLangs
 
