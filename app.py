@@ -3,6 +3,11 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
 app = FastAPI()
+import os
+import requests
+from dotenv import load_dotenv
+load_dotenv()
+api_uri = os.getenv("API_URI")
 
 origins = ["*"] 
 app.add_middleware(
@@ -26,6 +31,9 @@ async def getTrans(translation:translationClass):
     for i in toLangs:
         translated = (translator.translate(translation.sentence, dest= str(i)))
         translatedLangs[i] = translated.text
+    data = {"content": translatedLangs}
+    res = requests.patch(f"{api_uri}", data)
+    print(res)
     return translatedLangs
 
 #   \n en English(India)
