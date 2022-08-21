@@ -34,8 +34,10 @@ async def getTrans(translation:translationClass):
     for i in toLangs:
         translated = (translator.translate(translation.sentence, dest= str(i)))
         translatedLangs[i] = translated.text
-    data = {"content": translatedLangs, "id": translation.id}
-    res = requests.patch("https://sih-server-staging.onrender.com/article/update", data)
+    res = requests.patch("https://sih-server-staging.onrender.com/article/update", json={
+        "content": translatedLangs, 
+        "id": translation.id
+    })
     print(res)
     return translatedLangs
 
