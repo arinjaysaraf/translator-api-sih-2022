@@ -2,11 +2,13 @@ from googletrans import Translator
 from fastapi import FastAPI
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
-app = FastAPI()
 import os
 import requests
 from dotenv import load_dotenv
 load_dotenv()
+
+app = FastAPI()
+
 api_uri = os.getenv("API_URI")
 
 origins = ["*"] 
@@ -20,8 +22,6 @@ app.add_middleware(
 
 class translationClass(BaseModel): 
     sentence:str 
-
-
 
 @app.post("/")
 async def getTrans(translation:translationClass):
