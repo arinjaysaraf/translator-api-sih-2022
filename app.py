@@ -26,6 +26,8 @@ class translationClass(BaseModel):
 
 @app.post("/")
 async def getTrans(translation:translationClass):
+    print(translation.sentence)
+    print(translation.id)
     toLangs = ["hi","gu","kn","mr","ml","pa","ta","te","en"]
     translatedLangs = {}
     translator = Translator()
