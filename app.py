@@ -10,7 +10,7 @@ load_dotenv()
 app = FastAPI()
 
 api_uri = os.getenv("API_URI")
-print(api_uri)
+
 origins = ["*"] 
 app.add_middleware(
     CORSMiddleware,
@@ -34,7 +34,7 @@ async def getTrans(translation:translationClass):
     for i in toLangs:
         translated = (translator.translate(translation.sentence, dest= str(i)))
         translatedLangs[i] = translated.text
-    res = requests.patch("https://sih-server-staging.onrender.com/article/update", json={
+    res = requests.patch(f"{api_uri}/article/update", json={
         "content": translatedLangs, 
         "id": translation.id
     })
